@@ -6,6 +6,9 @@
           <img src="./../assets/fullstack.png" width="100" alt="Home" />
         </li>
       </router-link>
+      <router-link to="/">
+        <li>Home</li>
+      </router-link>
       <router-link to="/about">
         <li>Sobre nós</li>
       </router-link>
