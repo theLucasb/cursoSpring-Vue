@@ -1,14 +1,26 @@
-import * as types from "./mutations-types";
-import axios from "axios";
+import * as types from "./mutation-types";
+import Axios from "axios";
 
 export const getProducts = ({ commit }) => {
-  axios.get("http://localhost:8081/products").then((resp) => {
+  Axios.get("http://localhost:8081/products/").then((resp) => {
     commit(types.GET_PRODUCTS, resp.data);
   });
 };
 
 export const addProducts = ({ commit }, add) => {
-  axios.post("http://localhost:8081/products", add).then((resp) => {
+  Axios.post("http://localhost:8081/products/", add).then((resp) => {
     commit(types.ADD_PRODUCTS, resp.data);
+  });
+};
+
+export const findProductById = ({ commit }, id) => {
+  Axios.get("http://localhost:8081/products/" + id).then((resp) => {
+    commit(types.FIND_PRODUCTS, resp.data);
+  });
+};
+
+export const updateProducts = ({ commit }, add) => {
+  Axios.put("http://localhost:8081/products/" + add.id, add).then((resp) => {
+    commit(types.UPDATE_PRODUCTS, resp.data);
   });
 };

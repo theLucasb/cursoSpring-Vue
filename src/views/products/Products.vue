@@ -1,11 +1,10 @@
-import dados from '.';
 <template>
   <div class="principal">
     <div class="principal">
       <div class="topo">
         <h1>Products</h1>
         <button class="btn btn-success">
-          <router-link class="link" to="/products-register"
+          <router-link class="link" to="/register"
             >Adicionar Produto</router-link
           >
         </button>
@@ -17,6 +16,7 @@ import dados from '.';
             <div class="dados" id="descricao"><strong>Descrição</strong></div>
             <div class="dados" id="amount"><strong>Quantidade</strong></div>
             <div class="dados" id="price"><strong>Preço</strong></div>
+            <div class="dados" id="action"><strong>Ação</strong></div>
           </li>
         </ul>
       </div>
@@ -27,6 +27,13 @@ import dados from '.';
             <div class="dados" id="name">{{ dado.name }}</div>
             <div class="dados" id="amount">{{ dado.amount }}</div>
             <div class="dados" id="price">{{ dinheiro(dado.price) }}</div>
+            <div class="dados" id="action">
+              <router-link
+                v-bind:to="{ name: 'update', params: { id: dado.id } }"
+              >
+                <button class="mybt">Up</button>
+              </router-link>
+            </div>
           </li>
         </ul>
       </div>
@@ -45,7 +52,15 @@ export default {
   methods: {
     ...mapActions("products", ["getProducts"]),
     dinheiro(valor) {
-      return "R$" + valor.toFixed(2);
+      if (valor) {
+        let valorFinal = new Intl.NumberFormat("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        }).format(valor);
+        return valorFinal;
+      } else {
+        return "R$ -----";
+      }
     },
   },
   computed: {
@@ -65,7 +80,7 @@ export default {
   .topo {
     display: flex;
     justify-content: space-around;
-    padding: 2%;
+    padding: 2.1%;
     .btn {
       max-height: 50px;
       .link {

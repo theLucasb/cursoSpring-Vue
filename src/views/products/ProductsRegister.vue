@@ -41,7 +41,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["addProducts"]),
+    ...mapActions("products", ["addProducts"]),
 
     addProdutos(add) {
       add = {
@@ -61,15 +61,32 @@ export default {
 
 <style lang="scss" scoped>
 .main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 50px;
   .form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: solid 1px gray;
+    border-radius: 7%;
+    width: 35%;
+    padding: 1%;
     .row {
-      padding: 1.4%;
+      width: 100%;
+      padding: 1%;
       display: flex;
-      align-items: center;
+      align-items: baseline;
+      justify-content: flex-start;
+      label {
+        align-items: flex-start;
+        text-align: right;
+        width: 21%;
+      }
       input {
+        width: 69%;
         border: none;
         border-bottom: 1px solid grey;
       }
