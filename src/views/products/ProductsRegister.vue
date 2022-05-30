@@ -15,7 +15,7 @@
 
         <div class="row">
           <label for="">Preço</label>
-          <input v-model="form.price" class="ml-3" type="text" />
+          <input v-model="price" v-money="money" class="ml-3" type="text" />
         </div>
         <div class="botao">
           <button v-on:click="addProdutos" class="btn btn-primary">
@@ -29,6 +29,7 @@
 
 <script>
 import { mapActions } from "vuex";
+import { VMoney } from "v-money";
 
 export default {
   data() {
@@ -36,10 +37,20 @@ export default {
       form: {
         name: "",
         amount: "",
-        price: "",
+      },
+      price: 0,
+      money: {
+        decimal: ",",
+        thousands: ".",
+        prefix: "R$ ",
+        suffix: "",
+        precision: 2,
+        masked: false /* doesn't work with directive */,
       },
     };
   },
+  directives: { money: VMoney },
+
   methods: {
     ...mapActions("products", ["addProducts"]),
 

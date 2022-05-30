@@ -31,13 +31,15 @@
               <router-link
                 v-bind:to="{ name: 'update', params: { id: dado.id } }"
               >
-                <button class="btn btn-primary">Atualizar</button>
+                <button class="btn btn-primary">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
               </router-link>
               <button
                 v-on:click="excluirProduto(dado.id)"
-                class="btn btn-danger"
+                class="btn btn-danger ml-2"
               >
-                Excluir
+                <i class="fa-solid fa-trash-can"></i>
               </button>
             </div>
           </li>
