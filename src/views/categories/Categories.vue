@@ -7,10 +7,28 @@
         v-for="category in categories.categories"
         :key="category.id"
       >
-        <div class="dados">{{ category.id }}</div>
-        <div class="dados">{{ category.name }}</div>
+        <div class="categories">
+          <div class="dados">{{ category.id }}</div>
+          <div class="dados">
+            <button class="btn" v-on:click="mostrarProdutos(category.id)">
+              {{ category.name }}
+            </button>
+          </div>
+        </div>
+        <div class="row" v-for="produto in products.products" :key="produto.id">
+          <div v-if="produto.category" class="produtos">
+            <ul
+              v-if="
+                produto.category.id == productId && category.id == productId
+              "
+            >
+              <li>
+                {{ produto.name }}
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <hr />
     </div>
   </div>
 </template>
@@ -21,28 +39,30 @@ import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
-      produtos: "",
+      productId: "",
     };
   },
   methods: {
-    // getCategories() {
-    //   axios.get("http://localhost:8081/categories").then((resp) => {
-    //     this.categories = resp.data;
-    //   });
-    // },
+    ...mapActions("categories", ["getCategories"]),
+    ...mapActions("products", ["getProducts"]),
 
-    ...mapActions(["getCategories"]),
+    mostrarProdutos(id) {
+      id != this.productId ? (this.productId = id) : (this.productId = "");
+      console.log(this.productId);
+    },
   },
   created() {
     this.getCategories();
+    this.getProducts();
   },
   computed: {
-    ...mapState(["categories"]),
+    ...mapState(["categories", "products"]),
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../../scss/colors.scss";
 .categories {
   align-items: center;
   text-align: center;
@@ -52,10 +72,32 @@ export default {
     align-items: center;
     padding: 1%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    border: solid 1px grey;
+    border: 1px solid grey;
     .dados {
       padding: 0.7%;
+    }
+  }
+  .categories {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: $light;
+  }
+  .row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    .produtos {
+      width: 100%;
+      ul {
+        width: 100%;
+        display: flex;
+        list-style: none;
+        border-bottom: solid 1px gray;
+      }
     }
   }
 }
@@ -69,7 +111,6 @@ export default {
     font-size: 32px;
   }
 }
-
 .produtos {
   display: flex;
   flex-direction: column;
