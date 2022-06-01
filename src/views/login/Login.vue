@@ -9,12 +9,16 @@
       <button v-on:click="enviarDadosLogin" class="btn btn-primary mt-3">
         Login
       </button>
+      <span class="mt-4">
+        <a href="#"> Esqueceu sua senha?</a>
+      </span>
     </div>
   </div>
 </template>
 
 <script>
 import Axios from "axios";
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -23,15 +27,18 @@ export default {
     };
   },
   methods: {
+    ...mapActions("user", ["setUserLogin"]),
     enviarDadosLogin() {
       const dados = {
         username: this.username,
         password: this.password,
       };
       Axios.post("http://localhost:8081/login", dados).then((response) => {
-        localStorage.setItem("token", response.data);
-        this.$router.push("/");
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("username", response.data.username);
+        this.setUserLogin();
       });
+      this.$router.push("/");
     },
   },
 };
@@ -55,6 +62,7 @@ export default {
       border: none;
       border-bottom: solid 0.5px $secondary;
       border-radius: 4%;
+      background-color: $light;
     }
     input:focus {
       outline: none;

@@ -2,7 +2,7 @@
   <div class="principal">
     <div class="principal">
       <div class="topo">
-        <h1>Products</h1>
+        <h1>Produtos</h1>
         <button class="btn btn-success">
           <router-link class="link" to="/register"
             >Adicionar Produto</router-link

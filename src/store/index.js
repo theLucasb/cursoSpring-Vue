@@ -2,6 +2,7 @@ import Vuex from "vuex";
 // import Axios from "axios";
 import { store as products } from "./../views/products";
 import { store as categories } from "./../views/categories";
+import { store as user } from "./../views/login";
 
 // export default createStore({
 //   state: {
@@ -57,6 +58,7 @@ const store = new Vuex.Store({
   modules: {
     categories,
     products,
+    user,
   },
 });
 

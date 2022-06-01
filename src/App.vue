@@ -1,15 +1,6 @@
 <template>
   <div id="nav">
-    <div class="login">
-      <div class="buttons">
-        <router-link to="/login">
-          <button class="btn btn-primary btn-sm">Login</button>
-        </router-link>
-        <router-link class="link ml-3 mt-2" to="#">
-          <h6>Cadastro</h6>
-        </router-link>
-      </div>
-    </div>
+    <MenuLogin />
     <Menu />
     <hr />
   </div>
@@ -18,14 +9,14 @@
 
 <script>
 import Menu from "./components/Menu";
+import MenuLogin from "./components/MenuLogin";
 
 export default {
-  components: { Menu },
+  components: { Menu, MenuLogin },
 };
 </script>
 
 <style lang="scss">
-@import "scss/colors.scss";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -35,17 +26,17 @@ export default {
 }
 
 #nav {
-  .login {
-    width: 100%;
-    background-color: $light;
-    .buttons {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      margin-right: 4%;
-      .link {
-        text-decoration: none;
-      }
+  padding: 10px;
+
+  hr {
+    border-bottom: 1.4px solid #2c3e50;
+  }
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="categories">
-      <h1>Categories</h1>
+      <h1>Categorias</h1>
       <div
         class="list"
         v-for="category in categories.categories"
